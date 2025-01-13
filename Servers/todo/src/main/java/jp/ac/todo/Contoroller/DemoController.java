@@ -1,4 +1,4 @@
-package jp.ac.todo.Contoroller;
+package jp.ac.todo.contoroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

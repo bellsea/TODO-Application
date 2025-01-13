@@ -1,0 +1,77 @@
+/* サイドバーのコンテナ */
+.sidebar-container {
+    position: relative;
+  }
+  
+  /* ハンバーガーメニューのアイコン */
+  .hamburger-icon {
+    width: 30px;
+    height: 21px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+  
+  /* バツアイコンに変化 */
+  .hamburger-icon.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  
+  .hamburger-icon.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-icon.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  
+  /* サイドバー */
+  .sidebar {
+    position: fixed;
+    top: 80px; /* ヘッダーの下から表示 */
+    left: -270px;
+    width: 270px;
+    height: calc(100% - 80px); /* ヘッダーの分を除いた高さ */
+    background-color: white;
+    transition: left 0.2s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  /* サイドバー内のメニュー */
+  .menu a {
+    display: block;
+    padding: 15px;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .menu a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* オーバーレイ */
+  .overlay {
+    position: fixed;
+    top: 80px; /* ヘッダーの下から */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px);
+    background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒背景 */
+    z-index: 1000;
+  }
+  
