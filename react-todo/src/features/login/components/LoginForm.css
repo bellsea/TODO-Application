@@ -1,0 +1,17 @@
+/* 全体のフォームスタイル */
+.login-form {
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    gap: 30px; /* 各フォーム要素間のスペース */
+  }

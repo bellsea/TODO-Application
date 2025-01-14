@@ -53,6 +53,7 @@
   
   /* サイドバー内のメニュー */
   .menu a {
+    width: 85%;
     display: block;
     padding: 15px;
     color: black;
