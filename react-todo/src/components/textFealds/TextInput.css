@@ -1,21 +1,35 @@
-/* メールアドレス入力フィールドのスタイル */
+.text-form-input {
+  width: 80%; /* 親要素の幅を最大にする */
+  display: flex;
+  flex-direction: column;
+  align-items: flex; /* エラーメッセージが出ても入力欄の位置を固定 */
+}
+
 .text-input {
-    width: 90%;
-    height: 50px; /* メールアドレス入力欄の縦幅 */
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    box-sizing: border-box;
-  }
+  height: 50px; /* 入力欄の縦幅 */
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
   
-  .text-input:hover {
-    background-color: hsl(210, 2%, 61%);
-  }
+}
   
-  .text-input:focus {
-    background-color: hsl(0, 0%, 100%);
-    border-color: #007bff;
-    outline: none;
-  }
+.text-input:hover {
+  background-color: hsl(210, 2%, 61%);
+}
+  
+.text-input:focus {
+  background-color: hsl(0, 0%, 100%);
+  border-color: #007bff;
+  outline: none;
+}
+
+/* エラーメッセージのスタイル */
+.error-message {
+  height: 20px; /* 高さを固定 */
+  font-size: 14px;
+  color: red;
+  margin-top: 5px; /* 入力欄との間隔を確保 */
+}
