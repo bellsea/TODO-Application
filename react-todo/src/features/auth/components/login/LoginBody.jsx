@@ -1,12 +1,13 @@
 import React from "react";
-import Header from "../../../../components/header/Header";
 import LoginPage from "./LoginPage";
+import Layout from "../../../../components/layout/Layout";
 
 function LoginBody() {
   return (
     <div>
-      <Header title={"TodoApplication"}></Header>
-      <LoginPage></LoginPage>
+      <Layout title={"TodoApplication"}>
+        <LoginPage />
+      </Layout>
     </div>
   );
 }
