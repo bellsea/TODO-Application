@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import TextInput from "../../../../components/textFealds/TextInput.jsx";
-import Button from "../../../../components/buttons/Button.jsx";
+import Button from "../../../../components/buttons/button.jsx";
 import "./LoginForm.css";
 import TextPassword from "../../../../components/textFealds/TextPassword.jsx";
 import { useForm } from "react-hook-form";
