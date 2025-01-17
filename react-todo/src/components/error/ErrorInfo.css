@@ -1,0 +1,77 @@
+/* ErrorInfo.css */
+
+/* コンテナ全体のスタイル */
+.container {
+    max-width: 768px; /* 最大幅を指定 */
+    margin: 0 auto; /* 中央寄せ */
+    padding: 16px; /* パディング */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 画面全体の高さ */
+  }
+  
+  /* グリッドレイアウト */
+  .grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* エラー内容のスタイル */
+  .error-content {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  /* エラーコードのスタイル */
+  .error-code {
+    margin-right: 8px;
+    font-weight: bold;
+    font-size: 2rem; /* 大きなフォントサイズ */
+    color: #333;
+  }
+  
+  /* エラータイトルのスタイル */
+  .error-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  
+  /* エラー詳細のスタイル */
+  .error-detail {
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+  
+  /* リンクのスタイル */
+  .error-link {
+    color: #007bff; /* 青いリンク色 */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .error-link:hover {
+    color: #0056b3; /* ホバー時のリンク色 */
+  }
+  
+  /* レスポンシブデザイン: 小さい画面での調整 */
+  @media (max-width: 600px) {
+    .error-code {
+      display: block;
+      margin-right: 0;
+      font-size: 1.8rem;
+    }
+  
+    .error-title {
+      display: block;
+      font-size: 1.2rem;
+    }
+  }
+  
