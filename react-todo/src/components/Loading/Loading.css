@@ -1,0 +1,40 @@
+/* Loading.css */
+
+/* コンテナ：画面全体を覆う */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 画面全体の高さ */
+    background-color: #f8f9fa; /* 背景色 */
+  }
+  
+  /* スピナーのスタイル */
+  .spinner {
+    width: 50px; /* スピナーの幅 */
+    height: 50px; /* スピナーの高さ */
+    border: 6px solid #e9ecef; /* 外側の薄いボーダー */
+    border-top: 6px solid #007bff; /* 上部のアニメーション部分 */
+    border-radius: 50%; /* 円形にする */
+    animation: spin 1s linear infinite; /* スピナーの回転アニメーション */
+  }
+  
+  /* スピナーのアニメーション */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* ローディングメッセージ */
+  .loading-message {
+    margin-top: 16px; /* スピナーとの間隔 */
+    font-size: 18px; /* メッセージの文字サイズ */
+    color: #495057; /* テキストの色 */
+    text-align: center;
+  }
+  
