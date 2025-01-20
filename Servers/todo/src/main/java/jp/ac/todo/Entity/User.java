@@ -1,4 +1,4 @@
-package jp.ac.todo.Model;
+package jp.ac.todo.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,15 +14,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
-    
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "mailaddress", nullable = false, unique = true)
     private String mailaddress;
 
-    @Column(nullable = false)
+    @Column(name = "mailaddress", nullable = false)
     private String password;
 }
