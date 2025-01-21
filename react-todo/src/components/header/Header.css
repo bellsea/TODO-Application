@@ -21,3 +21,12 @@
   font-weight: bold;
   color: black;
 }
+
+.user-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  margin-left: auto;
+  padding-right: 100px;
+  width: fit-content; 
+}
