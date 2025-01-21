@@ -26,6 +26,10 @@ public class User {
     @Column(name = "mailaddress", nullable = false, unique = true)
     private String mailaddress;
 
+<<<<<<< HEAD
     @Column(name = "password", nullable = false)
+=======
+    @Column(name = "mailaddress", nullable = false)
+>>>>>>> 89fae42ed7ce8132e5d1366dd0ba919d219a1a7d
     private String password;
 }

@@ -19,6 +19,13 @@ export const authSlice = createSlice({
     },
     fail: (state) => {
       state.isFailed = true;
+      state.isLoading = false;
+    },
+    onLoading: (state) => {
+      state.isLoading = true;
+    },
+    offLoading: (state) => {
+      state.isLoading = false;
     },
   },
 });

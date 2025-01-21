@@ -1,22 +1,32 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import LoginBody from "./features/auth/components/login/LoginBody";
-import store from "./store/store";
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 import NotFound from "./components/error/NotFound";
+import ResetPassPage from "./features/auth/components/reset/ResetPassPage";
+import LoginPage from "./features/auth/components/login/LoginPage";
+import { authStateSelector } from "./store/reducers/authSlice";
 
 function App() {
+  const authState = useSelector(authStateSelector);
+
   return (
     // eslint-disable-next-line react/jsx-no-undef
-    <Provider store={store}>
-      <BrowserRouter>
+
+    <BrowserRouter>
+      {!authState.isLoggedIn ? (
         <Routes>
           <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/login" element={<LoginBody />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/reset" element={<ResetPassPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </Provider>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      )}
+    </BrowserRouter>
   );
 }
 
