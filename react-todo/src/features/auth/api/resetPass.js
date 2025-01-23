@@ -7,7 +7,7 @@ export const existMail = (mailaddres) => {
   const params = new URLSearchParams();
   params.append("mailaddres", mailaddres);
 
-  return axiosClient.post("/api/existMail", params, {
+  return axiosClient.post("/existMail", params, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

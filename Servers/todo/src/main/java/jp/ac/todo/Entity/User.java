@@ -1,5 +1,7 @@
 package jp.ac.todo.Entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,9 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
 @Getter
 @Setter
+@Table(name = "users") // テーブル名を指定
 public class User {
 
     @Id
@@ -29,6 +31,11 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    /** 生年月日 */
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
+
     @Column(name = "password", nullable = false)
     private String password;
+
 }

@@ -10,16 +10,6 @@ import jp.ac.todo.Entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findById(Long id);
-
-
-    // メールアドレスとパスワードでユーザーを取得
-    Optional<User> findByMailaddressAndPassword(String email, String password);
-
-    /**
-     * Eメールからアカウントを取得します。
-     * @param email Eメール
-     * @return アカウント
-     */
+    // メールアドレスからユーザを取得
     Optional<User> findByEmail(String email);
 }

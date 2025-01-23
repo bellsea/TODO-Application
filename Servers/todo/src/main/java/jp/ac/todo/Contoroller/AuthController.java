@@ -5,24 +5,24 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.ac.todo.Model.Response.UserResponse;
+import jp.ac.todo.Model.Response.AccountResponse;
 import jp.ac.todo.Model.Security.UserDetail;
-import jp.ac.todo.Service.AccountService;
+import jp.ac.todo.Service.UserService;
 
 @RestController
-public class AccountController {
+public class AuthController {
 
     @Autowired
-    private AccountService accountService;
+    private UserService userService;
 
-        /**
+    /**
      * セッション情報からアカウント情報を取得します。
-     * @param userDetail セッション情報
+     * @param accountDetails セッション情報
      * @return アカウント情報
      */
     @GetMapping("me")
-    public UserResponse me(@AuthenticationPrincipal UserDetail userDetail) {
-        return accountService.createAccountResponse(userDetail.getAccount().getId());
+    public AccountResponse me(@AuthenticationPrincipal UserDetail userDetails) {
+        return userService.createAccountResponse(userDetails.getAccount().getId());
     }
 
 }

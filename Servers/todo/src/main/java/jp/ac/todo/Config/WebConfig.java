@@ -8,36 +8,39 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jp.ac.todo.Model.Security.handler.ApiAuthenticationFailureHandler;
 import jp.ac.todo.Model.Security.handler.ApiAuthenticationSuccessHandler;
-import jp.ac.todo.Service.AccountService;
+import jp.ac.todo.Service.UserService;
 
 @Configuration
+@EnableWebSecurity
 public class WebConfig {
 
     @Autowired
-    private AccountService accountService;
+    private UserService userService;
+
 
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
+                .requestMatchers("/login", "/register", "resetPass", "existEmail").permitAll()
+                .anyRequest().authenticated()
             )
-            .cors(cors -> cors.configurationSource(corsConfigurer()))
+            .cors(cors -> cors.configurationSource(getCorsConfigurationSource()))
             .formLogin(form -> form
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
@@ -61,9 +64,16 @@ public class WebConfig {
     }
 
     @Bean
+    public AuthenticationFilter authenticationFilter() throws Exception {
+        AuthenticationFilter filter = new AuthenticationFilter(authenticationManager(null), null);
+        filter.setFilterProcessesUrl("/login"); // ログインエンドポイントを指定
+        return filter;
+    }
+
+    @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(accountService)
+        authenticationManagerBuilder.userDetailsService(userService)
                                     .passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
@@ -90,8 +100,10 @@ public class WebConfig {
         };
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurer() {
+    /**
+     * CORS設定
+     */
+    private CorsConfigurationSource getCorsConfigurationSource() {
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:3000");
         corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
@@ -103,4 +115,5 @@ public class WebConfig {
 
         return corsSource;
     }
+
 }
