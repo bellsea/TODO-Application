@@ -11,11 +11,13 @@ export const getMe = () => {
  * ログイン
  */
 export const login = (email, password) => {
-  const data = { email, password };
+  const params = new URLSearchParams();
+  params.append("email", email);
+  params.append("password", password);
 
-  return axiosClient.post("/login", data, {
+  return axiosClient.post("/login", params, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   });
 };

@@ -30,9 +30,6 @@ public class UserService implements UserDetailsService{
         if (username == null || username.isBlank()) {
             throw new UsernameNotFoundException("Username is not found.");
         }
-
-        System.out.println("Attempting to find user with email: " + username);
-        
         final User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Account dose not exist."));
 
@@ -52,6 +49,16 @@ public class UserService implements UserDetailsService{
         accountResponse.setBirthDate(account.getBirthDate().format(DateTimeFormatter.ofPattern("uuuu/MM/dd")));
 
         return accountResponse;
+    }
+
+    public Boolean isExistEmail(String email) {
+        final User user = userRepository.findByEmail(email).orElse(null);
+
+        if(user != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

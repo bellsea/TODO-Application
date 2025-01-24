@@ -8,7 +8,7 @@ export const login = createAsyncThunk(
   "auth/api/login",
   async (data, { dispatch, rejectWithValue }) => {
     try {
-      await loginAPI.login(data.mailaddres, data.password);
+      await loginAPI.login(data.email, data.password);
       const response = await loginAPI.getMe();
       dispatch(authSlice.actions.loggedIn({ account: response.data }));
       return null;
