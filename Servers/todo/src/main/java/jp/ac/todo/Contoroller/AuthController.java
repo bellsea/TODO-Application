@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.ac.todo.Model.Request.RegisterRequest;
 import jp.ac.todo.Model.Request.ResetParam;
 import jp.ac.todo.Model.Response.AccountResponse;
 import jp.ac.todo.Model.Security.UserDetail;
@@ -29,12 +30,25 @@ public class AuthController {
     }
 
     /**
+     * アカウント登録をします。
+     * @param registerRequest 登録情報リクエスト
+     * @return レスポンスステータス
+     */
+    @PostMapping("register")
+    public String register(@RequestBody RegisterRequest registerRequest) {
+        return userService.registerWebExaminee(registerRequest);
+    }
+
+    
+
+    /**
      * メールアドレスが存在するかを確認
+     * @param　param　メールアドレス
      */
     @PostMapping("/confirm")
-    public Boolean postMethodName(@RequestBody ResetParam param) {
+    public Boolean postMethodName(@RequestBody ResetParam ResetParam) {
         
-        return userService.isExistEmail(param.getEmail());
+        return userService.isExistEmail(ResetParam.getEmail());
     }
     
 }

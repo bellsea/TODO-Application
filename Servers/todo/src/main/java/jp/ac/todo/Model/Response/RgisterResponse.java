@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginResponse {
+public class RgisterResponse {
     private String token;
 
-    public LoginResponse(String token) {
+    public RgisterResponse(String token) {
         this.token = token;
     }
 }
