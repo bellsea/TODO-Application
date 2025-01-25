@@ -93,8 +93,10 @@ public class UserService implements UserDetailsService{
       * @return 
       */
       public Boolean resetPassword(ResetParam resetParam) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         final String email = resetParam.getEmail();
-        final String password = resetParam.getPassword();
+        final String password = passwordEncoder.encode(resetParam.getPassword());
+
 
         final User user = userRepository.findByEmail(email).orElse(null);
         user.setPassword(password);
