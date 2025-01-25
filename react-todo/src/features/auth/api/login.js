@@ -10,9 +10,9 @@ export const getMe = () => {
 /**
  * ログイン
  */
-export const login = (mailaddres, password) => {
+export const login = (email, password) => {
   const params = new URLSearchParams();
-  params.append("mailaddres", mailaddres);
+  params.append("email", email);
   params.append("password", password);
 
   return axiosClient.post("/login", params, {

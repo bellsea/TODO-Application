@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../../../components/layout/Layout";
 import ResetPassForm from "./ResetPassForm";
 import "./ResetPassPage.css";
@@ -24,10 +24,16 @@ function ResetPassPage() {
   const onsubmit = async (data) => {
     try {
       if (isMail === false) {
-        setIsMail(await dispatch(existMail(data)).unwrap());
-        if (isMail === false) {
+        console.log(isMail);
+        const mailExists = await dispatch(existMail(data)).unwrap();
+
+        setIsMail(mailExists);
+        console.log(mailExists);
+        console.log(isMail);
+        if (!mailExists) {
           setErrorMessage("メールアドレスが存在しません。");
           setShowModal(true);
+          return;
         }
       } else {
         dispatch(resetPass(data));
@@ -37,6 +43,7 @@ function ResetPassPage() {
       setShowModal(true);
     }
   };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };

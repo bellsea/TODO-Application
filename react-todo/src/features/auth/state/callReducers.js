@@ -2,13 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as loginAPI from "../api/login";
 import { authSlice } from "../../../store/reducers/authSlice";
 import * as resetPassAPI from "../api/resetPass";
+import * as registerAPI from "../api/register";
+import { Navigate } from "react-router-dom";
 
 // ログイン時
 export const login = createAsyncThunk(
-  "auth/api/login",
+  "auth/login",
   async (data, { dispatch, rejectWithValue }) => {
     try {
-      await loginAPI.login(data.mailaddres, data.password);
+      await loginAPI.login(data.email, data.password);
       const response = await loginAPI.getMe();
       dispatch(authSlice.actions.loggedIn({ account: response.data }));
       return null;
@@ -19,15 +21,42 @@ export const login = createAsyncThunk(
   }
 );
 
-// パスワードリセット_メール入力時
-export const existMail = createAsyncThunk(
-  "auth/api/isMail",
+// アカウント登録時
+export const registerAccount = createAsyncThunk(
+  "auth/register",
   async (data, { dispatch, rejectWithValue }) => {
     try {
       dispatch(authSlice.actions.onLoading());
-      const response = await resetPassAPI.existMail(data.mailaddres);
+      const response = await registerAPI.register(
+        data.name,
+        data.name_kana,
+        data.birthDate,
+        data.email,
+        data.password
+      );
+      if (response.data === "Success") {
+        dispatch(authSlice.actions.successAPI());
+        return response.data;
+      } else {
+        dispatch(authSlice.actions.fail());
+        return rejectWithValue();
+      }
+    } catch (error) {
+      dispatch(authSlice.actions.fail());
+      return rejectWithValue();
+    }
+  }
+);
+
+// パスワードリセット_メール入力時
+export const existMail = createAsyncThunk(
+  "auth/isMail",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      dispatch(authSlice.actions.onLoading());
+      const response = await resetPassAPI.existMail(data.email);
       dispatch(authSlice.actions.offLoading());
-      return response;
+      return response.data;
     } catch (error) {
       dispatch(authSlice.actions.fail());
       return rejectWithValue();
@@ -37,7 +66,7 @@ export const existMail = createAsyncThunk(
 
 // パスワードリセット時
 export const resetPass = createAsyncThunk(
-  "auth/api/resetPass",
+  "auth/resetPass",
   async (data, { dispatch, rejectWithValue }) => {
     try {
       dispatch(authSlice.actions.onLoading());

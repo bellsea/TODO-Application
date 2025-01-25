@@ -5,6 +5,7 @@ const initialState = {
   isFailed: false,
   isLoggedIn: false,
   account: null,
+  apiSuccess: false,
 };
 
 export const authSlice = createSlice({
@@ -26,6 +27,13 @@ export const authSlice = createSlice({
     },
     offLoading: (state) => {
       state.isLoading = false;
+    },
+    successAPI: (state) => {
+      state.isLoading = false;
+      state.apiSuccess = true;
+    },
+    resetStateAPI: (state) => {
+      state.apiSuccess = false;
     },
   },
 });

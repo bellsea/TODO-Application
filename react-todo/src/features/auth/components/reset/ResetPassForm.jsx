@@ -28,7 +28,7 @@ function ResetPassForm({ register, errors, handleSubmit, watch }) {
         })}
         error={errors.confirmPassword?.message}
       ></TextPassword>
-      <Button type="submit" label="送信"></Button>
+      <Button type="submit" label="パスワードを変更する"></Button>
     </form>
   );
 }

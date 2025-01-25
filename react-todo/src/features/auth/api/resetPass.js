@@ -3,15 +3,12 @@ import axiosClient from "../../../lib/axiosClient";
 /**
  * アカウント取得
  */
-export const existMail = (mailaddres) => {
-  const params = new URLSearchParams();
-  params.append("mailaddres", mailaddres);
+export const existMail = (email) => {
+  const params = {
+    email,
+  };
 
-  return axiosClient.post("/api/existMail", params, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
+  return axiosClient.post("/confirm", params);
 };
 
 /**
