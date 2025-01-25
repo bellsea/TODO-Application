@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../../../../components/textFealds/TextInput";
@@ -6,13 +6,13 @@ import TextPassword from "../../../../components/textFealds/TextPassword";
 import Button from "../../../../components/buttons/Button";
 import { registerAccount } from "../../state/callReducers.js";
 import { authStateSelector } from "../../../../store/reducers/authSlice.js";
-import { useNavigate } from "react-router-dom";
 import SuccessModal from "../../../../components/modal/SuccessModal.jsx";
+import ErrorModal from "../../../../components/modal/ErrorModal.jsx";
 
 function RegisterForm() {
   const dispatch = useDispatch();
   const authState = useSelector(authStateSelector);
-  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false); // モーダル表示管理
 
   const {
     register,
@@ -22,18 +22,15 @@ function RegisterForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const resultAction = await dispatch(registerAccount(data));
-    // API呼び出し結果を基に処理
-    if (resultAction.meta.requestStatus === "fulfilled") {
-      if (authState.apiSuccess) {
-        // 成功した場合はログイン画面に遷移
-        console.log("アカウント登録再度お試しください。");
-        navigate("/login");
-      }
-    } else {
-      // 失敗した場合、エラーメッセージを表示
-      console.log("アカウント登録に失敗しました。再度お試しください。");
+    const isRegister = await dispatch(registerAccount(data)).unwrap();
+    console.log(isRegister);
+    if (isRegister !== "Success") {
+      setShowModal(true);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -108,6 +105,13 @@ function RegisterForm() {
           message={"アカウント登録に成功しました。ログインを行ってください。"}
           buttonName={"ログイン"}
           path="/login"
+        />
+      )}
+
+      {showModal && (
+        <ErrorModal
+          errorMessage={"アカウント登録に失敗しました"}
+          onClick={handleCloseModal}
         />
       )}
     </form>

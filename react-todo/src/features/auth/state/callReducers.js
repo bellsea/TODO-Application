@@ -34,17 +34,10 @@ export const registerAccount = createAsyncThunk(
         data.email,
         data.password
       );
-      dispatch(authSlice.actions.successAPI());
-      console.log("レスポンス：" + response.data);
-
       if (response.data === "Success") {
-        console.log("アカウント登録成功");
-        // 成功した場合、ログイン画面に遷移
         dispatch(authSlice.actions.successAPI());
         return response.data;
       } else {
-        // 失敗した場合、エラーメッセージを表示
-        console.log("アカウント登録に失敗しました。再度お試しください。");
         dispatch(authSlice.actions.fail());
         return rejectWithValue();
       }
@@ -61,9 +54,9 @@ export const existMail = createAsyncThunk(
   async (data, { dispatch, rejectWithValue }) => {
     try {
       dispatch(authSlice.actions.onLoading());
-      const response = await resetPassAPI.existMail(data.mailaddres);
+      const response = await resetPassAPI.existMail(data.email);
       dispatch(authSlice.actions.offLoading());
-      return response;
+      return response.data;
     } catch (error) {
       dispatch(authSlice.actions.fail());
       return rejectWithValue();

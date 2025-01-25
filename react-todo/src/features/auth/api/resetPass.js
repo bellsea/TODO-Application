@@ -5,14 +5,10 @@ import axiosClient from "../../../lib/axiosClient";
  */
 export const existMail = (email) => {
   const params = {
-    email: email, // 必ず `email` を JSON オブジェクトにする
+    email,
   };
 
-  return axiosClient.post("/confirm", params, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
+  return axiosClient.post("/confirm", params);
 };
 
 /**
