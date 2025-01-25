@@ -14,13 +14,11 @@ export const existMail = (email) => {
 /**
  * ログイン
  */
-export const resetPass = (password) => {
-  const params = new URLSearchParams();
-  params.append("password", password);
+export const resetPass = (email, password) => {
+  const params = {
+    email,
+    password,
+  };
 
-  return axiosClient.post("/resetPass", params, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
+  return axiosClient.post("/resetPass", params);
 };

@@ -70,9 +70,9 @@ export const resetPass = createAsyncThunk(
   async (data, { dispatch, rejectWithValue }) => {
     try {
       dispatch(authSlice.actions.onLoading());
-      const response = await resetPassAPI.resetPass(data.password);
+      const response = await resetPassAPI.resetPass(data.email, data.password);
       dispatch(authSlice.actions.offLoading());
-      return response;
+      return response.data;
     } catch (error) {
       dispatch(authSlice.actions.fail());
       return rejectWithValue();

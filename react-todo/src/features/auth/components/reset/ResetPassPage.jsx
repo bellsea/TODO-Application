@@ -7,6 +7,7 @@ import { existMail, resetPass } from "../../state/callReducers";
 import IsMailForm from "./IsMailForm";
 import { useForm } from "react-hook-form";
 import ErrorModal from "../../../../components/modal/ErrorModal";
+import SuccessModal from "../../../../components/modal/SuccessModal";
 
 function ResetPassPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function ResetPassPage() {
   const [isMail, setIsMail] = useState(false); // メールアドレスが存在するか
   const [errorMessage, setErrorMessage] = useState(""); // エラーメッセージ
   const [showModal, setShowModal] = useState(false); // モーダル表示管理
+  const [isResetSuccess, setResetSuccess] = useState(false); // モーダル表示管理
 
   const onsubmit = async (data) => {
     try {
@@ -36,7 +38,10 @@ function ResetPassPage() {
           return;
         }
       } else {
-        dispatch(resetPass(data));
+        console.log(data);
+        const resetSuccess = await dispatch(resetPass(data)).unwrap();
+        console.log("パスワードリセット：" + resetSuccess);
+        setResetSuccess(resetSuccess);
       }
     } catch (error) {
       setErrorMessage("エラーが発生しました。");
@@ -72,6 +77,15 @@ function ResetPassPage() {
             <a href="register">アカウント登録へ</a>
           </nav>
         </div>
+        {isResetSuccess && (
+          <SuccessModal
+            message={
+              "パスワードリセットに成功しました。ログインを行ってください。"
+            }
+            buttonName={"ログイン画面へ"}
+            path="/login"
+          />
+        )}
 
         {/* メールアドレスが存在しない場合のモーダル */}
         {showModal && (

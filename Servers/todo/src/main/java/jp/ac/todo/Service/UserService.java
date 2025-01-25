@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import jp.ac.todo.Entity.User;
 import jp.ac.todo.Model.Request.RegisterRequest;
+import jp.ac.todo.Model.Request.ResetParam;
 import jp.ac.todo.Model.Response.AccountResponse;
 import jp.ac.todo.Model.Security.UserDetail;
 import jp.ac.todo.Repository.UserRepository;
@@ -57,7 +58,7 @@ public class UserService implements UserDetailsService{
      /**
       * リクエスト情報をユーザに登録します
       * @param registerRequest
-      * @return
+      * @return ユーザ登録のステータス
       */
     public String registerWebExaminee(RegisterRequest registerRequest) {
         User user = new User();
@@ -70,16 +71,39 @@ public class UserService implements UserDetailsService{
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         userRepository.save(user);
-
-        
+ 
         User isUser = userRepository.findByEmail(registerRequest.getEmail()).orElse(null);
         return isUser != null ? "Success" : "Failed";
     }
 
+    /**
+      * メールアドレスを持つアカウントがDBに存在するか
+      * @param email メールアドレス
+      * @return メールアドレスを持つアカウントがDBに存在するかのBool値
+      */
     public Boolean isExistEmail(String email) {
         final User user = userRepository.findByEmail(email).orElse(null);
 
         return user != null;
+    }
+
+    /**
+      * パスワードを再設定します
+      * @param registerRequest
+      * @return 
+      */
+      public Boolean resetPassword(ResetParam resetParam) {
+        final String email = resetParam.getEmail();
+        final String password = resetParam.getPassword();
+
+        final User user = userRepository.findByEmail(email).orElse(null);
+        user.setPassword(password);
+
+        userRepository.save(user);
+
+        final User confirmUser = userRepository.findByEmailAndPassword(email, password).orElse(null);
+
+        return confirmUser != null;
     }
 
 

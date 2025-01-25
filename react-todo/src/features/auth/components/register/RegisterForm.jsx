@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../../../../components/textFealds/TextInput";
 import TextPassword from "../../../../components/textFealds/TextPassword";
-import Button from "../../../../components/buttons/Button";
+import Button from "../../../../components/buttons/Button.jsx";
 import { registerAccount } from "../../state/callReducers.js";
 import { authStateSelector } from "../../../../store/reducers/authSlice.js";
 import SuccessModal from "../../../../components/modal/SuccessModal.jsx";
@@ -99,11 +99,11 @@ function RegisterForm() {
         })}
         error={errors.confirmPassword?.message}
       />
-      <Button type="submit" label="ログイン" />
+      <Button type="submit" label="アカウント登録" />
       {authState.apiSuccess && (
         <SuccessModal
           message={"アカウント登録に成功しました。ログインを行ってください。"}
-          buttonName={"ログイン"}
+          buttonName={"ログイン画面へ"}
           path="/login"
         />
       )}

@@ -43,12 +43,24 @@ public class AuthController {
 
     /**
      * メールアドレスが存在するかを確認
-     * @param　param　メールアドレス
+     * @param　resetParam　メールアドレス
+     * @return メールアドレスがDBに登録されてるかのBool値
      */
     @PostMapping("/confirm")
-    public Boolean postMethodName(@RequestBody ResetParam ResetParam) {
+    public Boolean confirmMail(@RequestBody ResetParam resetParam) {
         
-        return userService.isExistEmail(ResetParam.getEmail());
+        return userService.isExistEmail(resetParam.getEmail());
     }
+
+    /**
+     * パスワードを再設定します
+     * @param resetParam 
+     * @return パスワード登録が成功したかのBool値
+     */
+    @PostMapping("/resetPass")
+    public Boolean resetPass(@RequestBody ResetParam resetParam) {
+        return userService.resetPassword(resetParam);
+    }
+    
     
 }

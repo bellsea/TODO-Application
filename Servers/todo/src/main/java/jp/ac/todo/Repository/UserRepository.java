@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // メールアドレスからユーザを取得
     @Transactional(readOnly = true)
     Optional<User> findByEmail(String email);
+
+    // メールアドレスとパスワードからユーザーを取得
+    Optional<User> findByEmailAndPassword(String email, String password);
 }
