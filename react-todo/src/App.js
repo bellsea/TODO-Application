@@ -11,6 +11,7 @@ import AddTodoPage from "./features/todo/components/addTodo/AddTodoPage";
 import EditTodoPage from "./features/todo/components/editTodo/EditTodoPage";
 import AuthInitializer from "./utils/AuthInitializer";
 import { AuthRedirect } from "./utils/AuthRedirect";
+import TopPage from "./features/auth/components/top/TopPage";
 
 function App() {
   const authState = useSelector(authStateSelector);
@@ -29,8 +30,8 @@ function App() {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/top" element={<TopPage />} />
           <Route path="/" element={<Navigate replace to="/top" />} />
+          <Route path="/top" element={<TopPage />} />
           <Route path="/todo/add" element={<AddTodoPage />} />
           <Route path="/todo/edit" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
