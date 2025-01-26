@@ -6,6 +6,7 @@ import ResetPassPage from "./features/auth/components/reset/ResetPassPage";
 import LoginPage from "./features/auth/components/login/LoginPage";
 import { authStateSelector } from "./store/reducers/authSlice";
 import RegisterPage from "./features/auth/components/register/RegisterPage";
+import TopPage from "./features/auth/components/top/TopPage";
 
 function App() {
   const authState = useSelector(authStateSelector);
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate replace to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/top" element={<TopPage />} />
         </Routes>
       )}
     </BrowserRouter>
