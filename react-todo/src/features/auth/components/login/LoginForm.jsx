@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextInput from "../../../../components/textFealds/TextInput.jsx";
 import Button from "../../../../components/buttons/Button.jsx";
 import "./LoginForm.css";
@@ -7,10 +7,12 @@ import { useForm } from "react-hook-form";
 import { authStateSelector } from "../../../../store/reducers/authSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../../state/callReducers.js";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const authState = useSelector(authStateSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -18,16 +20,18 @@ function LoginForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log("送信データ:", data);
     // ここで API 送信処理を追加
-    dispatch(login(data));
-    console.log("状態:", authState);
+    try {
+      await dispatch(login(data)).unwrap();
+      console.log("ログイン成功");
+      console.log("状態:", authState);
+      navigate("/top");
+    } catch (error) {
+      console.log("状態:", authState);
+    }
   };
-
-  useEffect(() => {
-    console.log(authState);
-  }, [authState]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="login-form">
