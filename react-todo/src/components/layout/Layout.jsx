@@ -32,21 +32,30 @@ function Layout({ title, children }) {
     <ErrorBoundary>
       <div>
         <Header title={title} />
-        {authState.isLoading ? (
-          <Loading />
-        ) : (
-          <div>
-            {!errorState.isError ? (
-              children
-            ) : (
-              <ErrorPage
-                code={errorState.errorInfo.code}
-                title={errorState.errorInfo.title}
-                detail={errorState.errorInfo.detail}
-              />
-            )}
-          </div>
-        )}
+        <div
+          style={{
+            paddingTop: "100px" /* ヘッダーの高さ分だけ余白を確保 */,
+            minHeight:
+              "calc(100vh - 80px)" /* 画面全体の高さから80px（ヘッダーの高さ）を引いた最小高さ */,
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          {authState.isLoading ? (
+            <Loading />
+          ) : (
+            <div>
+              {!errorState.isError ? (
+                children
+              ) : (
+                <ErrorPage
+                  code={errorState.errorInfo.code}
+                  title={errorState.errorInfo.title}
+                  detail={errorState.errorInfo.detail}
+                />
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </ErrorBoundary>
   );

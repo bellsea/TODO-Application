@@ -35,8 +35,8 @@ function Sidebar() {
           <a href="#home" onClick={closeSidebar}>
             ホーム
           </a>
-          <a href="#blog" onClick={closeSidebar}>
-            ブログ
+          <a href="/addtodo" onClick={closeSidebar}>
+            TODO追加画面
           </a>
           <a href="#sns" onClick={closeSidebar}>
             SNS
