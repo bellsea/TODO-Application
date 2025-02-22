@@ -1,0 +1,24 @@
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* チェックボックスとラベルの間隔 */
+  }
+
+  .checkbox-input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .checkbox-label {
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* エラーメッセージのスタイル */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  

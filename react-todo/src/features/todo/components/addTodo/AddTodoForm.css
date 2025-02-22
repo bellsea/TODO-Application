@@ -1,0 +1,77 @@
+.add-form-layout {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 30px; /* 各フォーム要素間のスペース */
+}
+
+.title-label-group {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-right: auto;
+}
+
+.span-label-group {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    margin-right: auto;
+}
+
+.explain-label-group {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-right: auto;
+}
+
+
+.title-label {
+    padding-right: 40px;
+    font-size: 24px;
+    white-space: nowrap;
+    padding-top: 5px;
+}
+
+.span-label {
+    padding-right: 88px;
+    font-size: 24px;
+    white-space: nowrap;
+    padding-top: 5px;
+}
+
+.span-detail-label {
+    width: 24%;
+    padding-left: 15px;
+    margin-block: auto;
+    font-size: 18px;
+}
+
+.checkBox-alone {
+    margin-right: auto;
+}
+
+.frequency {
+    margin-right: auto;
+    padding-left: 15px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.checkBox-routine-everyday {
+    margin-right: auto;
+}
+.checkBox-routine {
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    gap:30px
+}

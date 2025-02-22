@@ -1,7 +1,4 @@
 .login-page-container {
-    padding-top: 100px; /* ヘッダーの高さ分だけ余白を確保 */
-    min-height: calc(100vh - 80px);
-    background-color: #f9f9f9;
     padding-right: 200px;
     padding-left: 200px;
 }
