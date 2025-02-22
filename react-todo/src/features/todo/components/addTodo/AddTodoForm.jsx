@@ -5,8 +5,11 @@ import Button from "../../../../components/buttons/Button";
 import "./AddTodoForm.css";
 import TextArea from "../../../../components/textFealds/TextArea";
 import CheckBox from "../../../../components/checkbox/CheckBox";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../state/callReducers";
 
 function AddTodoForm() {
+  const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
 
   const {
@@ -17,6 +20,7 @@ function AddTodoForm() {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
+    dispatch(addTodo(data));
   };
 
   return (
@@ -38,10 +42,12 @@ function AddTodoForm() {
         <label className="span-detail-label">日付：</label>
         <TextInput
           type="date"
+          {...register("spanDate")}
         />
         <label className="span-detail-label">時間：</label>
         <TextInput
           type="time"
+          {...register("spanTime")}
         />
       </div>
 
@@ -52,7 +58,6 @@ function AddTodoForm() {
           label="説明"
           row={4}
           {...register("explain")}
-          error={errors.explain?.message}
         />
       </div>
 
@@ -63,7 +68,6 @@ function AddTodoForm() {
           {...register("isRoutine")}
           checked={isChecked}
           onChange={(e) => setIsChecked(e.target.checked)}
-          error={errors.isRoutine?.message}
         />
       </div>
 
@@ -75,37 +79,30 @@ function AddTodoForm() {
             <CheckBox
               label="月"
               {...register("monday")}
-              error={errors.monday?.message}
             />
             <CheckBox
               label="火"
               {...register("tuesday")}
-              error={errors.tuesday?.message}
             />
             <CheckBox
               label="水"
               {...register("wednesday")}
-              error={errors.wednesday?.message}
             />
             <CheckBox
               label="木"
               {...register("thursday")}
-              error={errors.thursday?.message}
             />
             <CheckBox
               label="金"
               {...register("friday")}
-              error={errors.friday?.message}
             />
             <CheckBox
               label="土"
               {...register("saturday")}
-              error={errors.saturday?.message}
             />
             <CheckBox
               label="日"
               {...register("sunday")}
-              error={errors.sunday?.message}
             />
           </div>
         </>

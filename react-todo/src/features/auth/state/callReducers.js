@@ -3,7 +3,6 @@ import * as loginAPI from "../api/login";
 import { authSlice } from "../../../store/reducers/authSlice";
 import * as resetPassAPI from "../api/resetPass";
 import * as registerAPI from "../api/register";
-import { Navigate } from "react-router-dom";
 
 // ログイン時
 export const login = createAsyncThunk(
