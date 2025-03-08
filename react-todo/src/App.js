@@ -8,6 +8,7 @@ import { authStateSelector } from "./store/reducers/authSlice";
 import RegisterPage from "./features/auth/components/register/RegisterPage";
 import TopPage from "./features/auth/components/top/TopPage";
 import AddTodoPage from "./features/todo/components/addTodo/AddTodoPage";
+import EditTodoPage from "./features/todo/components/editTodo/EditTodoPage";
 
 function App() {
   const authState = useSelector(authStateSelector);
@@ -22,7 +23,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/reset" element={<ResetPassPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/addtodo" element={<AddTodoPage />} />
+          <Route path="/todo/add" element={<AddTodoPage />} />
+          <Route path="/todo/edit" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       ) : (
@@ -30,7 +32,8 @@ function App() {
           <Route path="/" element={<Navigate replace to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/top" element={<TopPage />} />
-          <Route path="/addtodo" element={<AddTodoPage />} />
+          <Route path="/todo/add" element={<AddTodoPage />} />
+          <Route path="/todo/edit" element={<EditTodoPage />} />
         </Routes>
       )}
     </BrowserRouter>

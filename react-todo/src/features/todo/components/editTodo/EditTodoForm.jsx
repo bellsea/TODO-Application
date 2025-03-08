@@ -6,9 +6,9 @@ import "../../asset/todoForm.css";
 import TextArea from "../../../../components/textFealds/TextArea";
 import CheckBox from "../../../../components/checkbox/CheckBox";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../state/callReducers";
+import { editTodo } from "../../state/callReducers";
 
-function AddTodoForm() {
+function EditTodoForm() {
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -20,7 +20,7 @@ function AddTodoForm() {
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
-    dispatch(addTodo(data));
+    dispatch(editTodo(data));
   };
 
   return (
@@ -113,4 +113,4 @@ function AddTodoForm() {
   );
 }
 
-export default AddTodoForm;
+export default EditTodoForm;

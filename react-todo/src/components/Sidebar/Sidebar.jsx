@@ -35,11 +35,11 @@ function Sidebar() {
           <a href="#home" onClick={closeSidebar}>
             ホーム
           </a>
-          <a href="/addtodo" onClick={closeSidebar}>
+          <a href="/todo/add" onClick={closeSidebar}>
             TODO追加画面
           </a>
-          <a href="#sns" onClick={closeSidebar}>
-            SNS
+          <a href="/todo/edit" onClick={closeSidebar}>
+            TODO編集画面
           </a>
         </nav>
       </div>

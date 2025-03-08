@@ -13,5 +13,5 @@ export const addTodo = (title, spanDate, spanTime, explain, isRoutine, routine) 
     routine
   };
 
-  return axiosClient.post("/addtodo", params);
+  return axiosClient.post("/todo/add", params);
 };
