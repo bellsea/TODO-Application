@@ -1,4 +1,4 @@
-.add-form-layout {
+.todo-form-layout {
     width: 80%;
     height: auto;
     margin: 0 auto;
@@ -12,21 +12,21 @@
     gap: 30px; /* 各フォーム要素間のスペース */
 }
 
-.title-label-group {
+.todo-title-label-group {
     display: flex;
     flex-direction: row;
     width: 50%;
     margin-right: auto;
 }
 
-.span-label-group {
+.todo-span-label-group {
     display: flex;
     flex-direction: row;
     width: 60%;
     margin-right: auto;
 }
 
-.explain-label-group {
+.todo-explain-label-group {
     display: flex;
     flex-direction: row;
     width: 90%;
@@ -34,42 +34,42 @@
 }
 
 
-.title-label {
+.todo-title-label {
     padding-right: 40px;
     font-size: 24px;
     white-space: nowrap;
     padding-top: 5px;
 }
 
-.span-label {
+.todo-span-label {
     padding-right: 88px;
     font-size: 24px;
     white-space: nowrap;
     padding-top: 5px;
 }
 
-.span-detail-label {
+.todo-span-detail-label {
     width: 24%;
     padding-left: 15px;
     margin-block: auto;
     font-size: 18px;
 }
 
-.checkBox-alone {
+.todo-checkBox-alone {
     margin-right: auto;
 }
 
-.frequency {
+.todo-frequency {
     margin-right: auto;
     padding-left: 15px;
     font-weight: 600;
     font-size: 20px;
 }
 
-.checkBox-routine-everyday {
+.todo-checkBox-routine-everyday {
     margin-right: auto;
 }
-.checkBox-routine {
+.todo-checkBox-routine {
     margin-right: auto;
     display: flex;
     flex-direction: row;
