@@ -1,17 +1,17 @@
 import React from "react";
 import Layout from "../../../../components/layout/Layout";
 import "../../asset/todoPage.css";
-import AddTodoForm from "./AddTodoForm";
+import AddTodoForm from "./EditTodoForm";
 
-function AddTodoPage() {
+function EditTodoPage() {
   return (
     <Layout title={"TodoApplication"}>
       <div className="todo-page-layout">
-        <h1>Todo追加</h1>
+        <h1>Todo編集</h1>
         <AddTodoForm></AddTodoForm>
       </div>
     </Layout>
   );
 }
 
-export default AddTodoPage;
+export default EditTodoPage;
