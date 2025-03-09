@@ -31,7 +31,6 @@ function App() {
         <Routes>
           <Route path="/top" element={<TopPage />} />
           <Route path="/" element={<Navigate replace to="/top" />} />
-          <Route path="/top" element={<LoginPage />} />
           <Route path="/todo/add" element={<AddTodoPage />} />
           <Route path="/todo/edit" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
