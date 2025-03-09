@@ -1,6 +1,7 @@
 package jp.ac.todo.Contoroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +26,14 @@ public class AuthController {
      * @return アカウント情報
      */
     @GetMapping("/me")
-    public AccountResponse me(@AuthenticationPrincipal UserDetail userDetails) {
-        return userService.createAccountResponse(userDetails.getAccount().getId());
+    public ResponseEntity<?> me(@AuthenticationPrincipal UserDetail userDetails) {
+        if (userDetails == null) {
+            return ResponseEntity.ok("Unauthorized");
+        }
+        AccountResponse account = userService.createAccountResponse(userDetails.getAccount().getId());
+        return ResponseEntity.ok(account);
     }
+
 
     /**
      * アカウント登録をします。
