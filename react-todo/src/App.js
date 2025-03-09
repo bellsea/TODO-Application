@@ -7,30 +7,34 @@ import LoginPage from "./features/auth/components/login/LoginPage";
 import { authStateSelector } from "./store/reducers/authSlice";
 import RegisterPage from "./features/auth/components/register/RegisterPage";
 import AddTodoPage from "./features/todo/components/addTodo/AddTodoPage";
+import AuthInitializer from "./utils/AuthInitializer";
+import { AuthRedirect } from "./utils/AuthRedirect";
 
 function App() {
   const authState = useSelector(authStateSelector);
 
   return (
-    // eslint-disable-next-line react/jsx-no-undef
-
     <BrowserRouter>
-      {!authState.isLoggedIn ? (
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/reset" element={<ResetPassPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/addtodo" element={<AddTodoPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/addtodo" element={<AddTodoPage />} />
-        </Routes>
-      )}
+      <AuthInitializer />
+      <AuthRedirect />
+      <Routes>
+        {!authState.isLoggedIn ? (
+          <>
+            <Route path="/" element={<Navigate replace to="/login" />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/reset" element={<ResetPassPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/addtodo" element={<AddTodoPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Navigate replace to="/top" />} />
+            <Route path="/top" element={<LoginPage />} />
+            <Route path="/addtodo" element={<AddTodoPage />} />
+          </>
+        )}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   );
 }

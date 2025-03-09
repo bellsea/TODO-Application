@@ -18,6 +18,12 @@ export const authSlice = createSlice({
       state.isLoggedIn = true;
       state.account = action.payload.account; // 取得したデータをstateに保存
     },
+    loggedOut: (state) => {
+      state.isLoading = false;
+      state.isFailed = false;
+      state.isLoggedIn = false;
+      state.account = false;
+    },
     fail: (state) => {
       state.isFailed = true;
       state.isLoading = false;

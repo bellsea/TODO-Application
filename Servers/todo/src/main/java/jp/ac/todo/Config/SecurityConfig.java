@@ -38,7 +38,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
+                // 認証不要のエンドポイント
+                .requestMatchers( "/login", "/resetPass", "/register", "/confirm", "/me").permitAll()
+                // その他のAPIは認証が必要
+                .anyRequest().authenticated()
             )
             .cors(cors -> cors.configurationSource(getCorsConfigurationSource()))
             .formLogin(form -> form
