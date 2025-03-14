@@ -8,7 +8,7 @@ export const getTodo = () => {
 }
 
 /**
- * TODO追加API
+ * TODO編集API
  */
 export const editTodo = (title, spanDate, spanTime, explain, isRoutine, routine) => {
   const params = {
