@@ -19,41 +19,22 @@ function App() {
     <BrowserRouter>
       <AuthInitializer />
       <AuthRedirect />
-      <Routes>
-        {!authState.isLoggedIn ? (
-          <>
-            <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/reset" element={<ResetPassPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/addtodo" element={<AddTodoPage />} />
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<Navigate replace to="/top" />} />
-            <Route path="/top" element={<LoginPage />} />
-            <Route path="/addtodo" element={<AddTodoPage />} />
-          </>
-        )}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
       {!authState.isLoggedIn ? (
         <Routes>
           <Route path="/" element={<Navigate replace to="/login" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/reset" element={<ResetPassPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/todo/add" element={<AddTodoPage />} />
-          <Route path="/todo/edit" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       ) : (
         <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/top" element={<TopPage />} />
+          <Route path="/" element={<Navigate replace to="/top" />} />
+          <Route path="/top" element={<LoginPage />} />
           <Route path="/todo/add" element={<AddTodoPage />} />
           <Route path="/todo/edit" element={<EditTodoPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       )}
     </BrowserRouter>
