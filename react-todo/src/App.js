@@ -33,7 +33,7 @@ function App() {
           <Route path="/top" element={<TopPage />} />
           <Route path="/login" element={<Navigate replace to="/top" />} />
           <Route path="/todo/add" element={<AddTodoPage />} />
-          <Route path="/todo/edit" element={<EditTodoPage />} />
+          <Route path="/todo/edit/:id" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}

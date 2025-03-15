@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import TextInput from "../../../../components/textFealds/TextInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/buttons/Button";
@@ -6,9 +6,9 @@ import "../../asset/todoForm.css";
 import TextArea from "../../../../components/textFealds/TextArea";
 import CheckBox from "../../../../components/checkbox/CheckBox";
 import { useDispatch } from "react-redux";
-import { editTodo } from "../../state/callReducers";
+import { editTodo, getTodo } from "../../state/callReducers";
 
-function EditTodoForm() {
+function EditTodoForm({id}) {
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -22,6 +22,15 @@ function EditTodoForm() {
     console.log("Form Data:", data);
     dispatch(editTodo(data));
   };
+
+  const isFirstRender = useRef(true); // ✅ 初回判定用
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      //dispatch(getTodo(id));
+      isFirstRender.current = false; // ✅ 2回目以降は実行しない
+    }
+  }, [dispatch, id]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="todo-form-layout">

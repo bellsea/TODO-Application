@@ -45,8 +45,9 @@ export const getTodo = createAsyncThunk(
   "todo/get",
   async (data, { dispatch, rejectWithValue }) => {
     try {
+      console.log(data);
       dispatch(authSlice.actions.onLoading());
-      const response = await editTodoAPI.getTodo(data.todoId);
+      const response = await editTodoAPI.getTodo(data);
       if (response.data.status === "Success") {
         dispatch(authSlice.actions.successAPI());
         return response.data;
