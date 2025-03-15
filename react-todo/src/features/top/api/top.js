@@ -13,3 +13,10 @@ export const getAllTodo = () => {
 export const getAllScheduled = () => {
     return axiosClient.get("/schedules/all");
 };
+
+/**
+ * todo完了
+ */
+export const completeTodo = (data) => {
+    return axiosClient.post("/todo/complete")
+};

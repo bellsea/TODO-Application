@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  todo: null,
+  todo: [
+    {id: 1, title: "おやつ", date: "2025/03/14", time:"20:30"},
+    {id: 2, title: "宿題", date: "2025/03/12" , time:"20:30"},
+  ],
   schedules: null,
   isSuccessAPI: false,
   isFailed: false,
@@ -28,6 +31,6 @@ export const dataSlice = createSlice({
 /** 初期化 */
 export const initialize = createAsyncThunk("data/initialize");
 
-export const todoStateSelector = (state) => state.data;
+export const dataStateSelector = (state) => state.data;
 
 export default dataSlice.reducer;
