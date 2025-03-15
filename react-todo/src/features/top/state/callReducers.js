@@ -3,7 +3,7 @@ import { authSlice } from "../../../store/reducers/authSlice";
 import * as topAPI from "../api/top";
 import { dataSlice } from "../../../store/reducers/dataSlice";
 
-// Todo_Schedule取得
+// Todo_Schedule全取得
 export const getAllData = createAsyncThunk(
   "getData",
   async ( { dispatch, rejectWithValue } ) => {

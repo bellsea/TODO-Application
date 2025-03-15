@@ -1,16 +1,30 @@
-.top-list-body {
-  display: flex;
-  width: 100vw;  /* 画面全幅 */
-  height: 100vh; /* 画面全高 */
-  justify-content: center; /* 中央配置（オプション） */
-  align-items: center; /* 縦方向中央（オプション） */
-}
+
 
 .top-list-child {
   flex: 1;  /* 均等な幅 */
-  height: 90%; /* 高さを調整 */
-  border: 2px solid black; /* 縁の設定 */
+  border: 0.5px solid black; /* 縁の設定 */
   padding: 20px; /* 内側の余白 */
-  box-sizing: border-box; /* paddingを含めたサイズ計算 */
   background-color: white; /* 背景色 */
+  z-index: 1; /* 前面に表示 */
+}
+
+.top-list-body {
+  display: flex;
+  align-items: flex-start; /* 上揃え */
+  padding-left: 30%;
+}
+
+.todolist-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.fixed-calendar {
+  position: fixed;
+  display: flex;
+  left: 0%;
+  border-radius: 8px; /* 角丸 */
+  padding: 10px;
+  pointer-events: auto; /* クリックを有効にする */
 }

@@ -46,7 +46,14 @@ export const getTodo = createAsyncThunk(
   async (data, { dispatch, rejectWithValue }) => {
     try {
       console.log(data);
-      dispatch(authSlice.actions.onLoading());
+      // dispatch(authSlice.actions.onLoading());
+      /*
+      /  無限ループの原因：authSlice.actions.fail()の時は、エラー画面を表示する実装をしなければいけない。
+      /  resuxが持つstateが変化するとレンダリングが起こる。
+      /  authSlice.actions.fail()でisFailedがtrueになり、このTodo編集画面を再レンダリングし、
+      /  useEffectを動かし、authSlice.actions.onLoading()で、isFailedがfalseになり、
+      /  またauthSlice.actions.fail()が動くといった無限ループになってる気がする。
+      */
       const response = await editTodoAPI.getTodo(data);
       if (response.data.status === "Success") {
         dispatch(authSlice.actions.successAPI());

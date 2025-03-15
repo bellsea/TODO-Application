@@ -18,5 +18,5 @@ export const getAllScheduled = () => {
  * todo完了
  */
 export const completeTodo = (data) => {
-    return axiosClient.post("/todo/complete")
+    return axiosClient.post("/todo/complete", data)
 };

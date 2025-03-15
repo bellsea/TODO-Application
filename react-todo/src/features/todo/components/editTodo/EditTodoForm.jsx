@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextInput from "../../../../components/textFealds/TextInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/buttons/Button";
@@ -23,19 +23,9 @@ function EditTodoForm({id}) {
     dispatch(editTodo(data));
   };
 
-  const isFirstRender = useRef(true); // ✅ 初回判定用
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      /*
-      dispatch(getTodo(id));　
-      無限ループの原因：authSlice.actions.fail()の時は、エラー画面を表示する実装をしなければいけない。
-      authState.isFailedがtrueになったにも関わらず、もう一度このTodo編集画面を表示し、
-      useEffectを動かし、authSlice.actions.onLoadingで、authState.isFailedがfalseになり、
-      またauthSlice.actions.fail()が動くといった無限ループになってる気がする。
-      */
-      isFirstRender.current = false; // ✅ 2回目以降は実行しない
-    }
+      dispatch(getTodo(id));
   }, [dispatch, id]);
 
   return (

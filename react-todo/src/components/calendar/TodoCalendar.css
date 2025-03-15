@@ -1,13 +1,12 @@
 .calendar-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 /* カレンダー全体のサイズ調整 */
 .react-calendar {
-    width: 800px;  /* カレンダーを大きく */
+    width: 30%;  /* カレンダーを大きく */
     max-width: 300%;
     font-size: 18px;  /* フォントサイズを大きく */
     border: none;
@@ -15,14 +14,15 @@
   
   /* 曜日部分のサイズ調整 */
   .react-calendar__month-view__weekdays {
-    font-size: 16px;
+    font-size: 12px;
   }
   
   /* 各日付のセル（ボタン）のサイズを大きく */
   .react-calendar__tile {
-    padding: 20px 0;  /* 縦方向の余白を増やす */
-    font-size: 20px;  /* 日付の文字を大きく */
-    height: 60px;  /* セルの高さを調整 */
+    display: flex;
+    align-items: flex-start;
+    font-size: 14px;  /* 日付の文字を大きく */
+    height: 100px;  /* セルの高さを調整 */
   }
   
   /* 選択した日付の強調 */

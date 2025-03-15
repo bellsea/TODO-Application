@@ -1,0 +1,72 @@
+.schedule-container {
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+  }
+  
+  .schedule-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .schedule-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background: #f9f9f9;
+  }
+  
+  .schedule-grid {
+    display: flex;
+    position: relative;
+  }
+  
+  .time-axis {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 10px;
+  }
+  
+  .time-label {
+    height: 50px;
+    line-height: 50px;
+    font-size: 0.9rem;
+    color: gray;
+    position: relative;
+    width: 50px;
+  }
+  
+  .time-label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 60px; /* ラベルの右側から線を開始 */
+    width: 25vw; /* 画面幅いっぱいに広げる */
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule-list {
+    position: relative;
+    width: 200px;
+  }
+  
+  .schedule-item {
+    position: absolute;
+    left: 0;
+    width: 100px;
+    background-color: rgba(100, 149, 237, 0.7); /* 半透明の青色 */
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer; /* ✅ クリックできることを明示 */
+    transition: 0.2s ease-in-out;
+  }
+
+  .schedule-item:hover {
+    background-color: #618f63; /* ✅ ホバー時のエフェクト */
+  }
