@@ -3,8 +3,8 @@ import axiosClient from "../../../lib/axiosClient";
 /**
  * TODO取得API
  */
-export const getTodo = () => {
-    return axiosClient.get("/todo/edit");
+export const getTodo = (id) => {
+    return axiosClient.get("/todo/edit/{id}");
 }
 
 /**

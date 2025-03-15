@@ -6,6 +6,7 @@ import ResetPassPage from "./features/auth/components/reset/ResetPassPage";
 import LoginPage from "./features/auth/components/login/LoginPage";
 import { authStateSelector } from "./store/reducers/authSlice";
 import RegisterPage from "./features/auth/components/register/RegisterPage";
+import TopPage from "./features/top/components/top/TopPage";
 import AddTodoPage from "./features/todo/components/addTodo/AddTodoPage";
 import EditTodoPage from "./features/todo/components/editTodo/EditTodoPage";
 import AuthInitializer from "./utils/AuthInitializer";
@@ -29,9 +30,10 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Navigate replace to="/top" />} />
-          <Route path="/top" element={<LoginPage />} />
+          <Route path="/top" element={<TopPage />} />
+          <Route path="/login" element={<Navigate replace to="/top" />} />
           <Route path="/todo/add" element={<AddTodoPage />} />
-          <Route path="/todo/edit" element={<EditTodoPage />} />
+          <Route path="/todo/edit/:id" element={<EditTodoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       )}
