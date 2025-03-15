@@ -32,7 +32,7 @@ function Sidebar() {
       {/* サイドバー */}
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <nav className="menu">
-          <a href="#home" onClick={closeSidebar}>
+          <a href="/top" onClick={closeSidebar}>
             ホーム
           </a>
           <a href="/todo/add" onClick={closeSidebar}>

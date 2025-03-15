@@ -6,12 +6,11 @@ import ResetPassPage from "./features/auth/components/reset/ResetPassPage";
 import LoginPage from "./features/auth/components/login/LoginPage";
 import { authStateSelector } from "./store/reducers/authSlice";
 import RegisterPage from "./features/auth/components/register/RegisterPage";
-import TopPage from "./features/auth/components/top/TopPage";
+import TopPage from "./features/top/components/top/TopPage";
 import AddTodoPage from "./features/todo/components/addTodo/AddTodoPage";
 import EditTodoPage from "./features/todo/components/editTodo/EditTodoPage";
 import AuthInitializer from "./utils/AuthInitializer";
 import { AuthRedirect } from "./utils/AuthRedirect";
-import TopPage from "./features/auth/components/top/TopPage";
 
 function App() {
   const authState = useSelector(authStateSelector);
