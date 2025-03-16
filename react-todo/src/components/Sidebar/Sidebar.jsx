@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
+import LogoutModal from "../modal/LogoutModal";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   // サイドバーの開閉切り替え
   const toggleSidebar = () => {
@@ -13,6 +15,11 @@ function Sidebar() {
   const closeSidebar = () => {
     setIsOpen(false);
   };
+
+    // ログアウトモーダルを開く
+    const openLogoutModal = () => {
+      setIsLogoutModalOpen(true);
+    };
 
   return (
     <div className="sidebar-container">
@@ -41,7 +48,14 @@ function Sidebar() {
           <a href="/todo/edit" onClick={closeSidebar}>
             TODO編集画面
           </a>
+          <div className="logout-button" onClick={openLogoutModal}>
+            ログアウト
+          </div>
         </nav>
+        {/* ログアウトモーダル */}
+        {isLogoutModalOpen && (
+          <LogoutModal message={"ログアウトしますか？"} confirmButtonName={"ログアウト"} backButtonName={"戻る"} setIsLogoutModalOpen={setIsLogoutModalOpen}></LogoutModal>
+        )}
       </div>
     </div>
   );

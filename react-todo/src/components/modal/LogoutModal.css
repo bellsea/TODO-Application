@@ -1,0 +1,36 @@
+.modal-massage {
+    font-size: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    gap: 50px;
+}
+
+.logout-confirm {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-confirm:hover {
+    background: darkred;
+}
+
+.close-modal {
+    background: gray;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    background: darkgray;
+}
