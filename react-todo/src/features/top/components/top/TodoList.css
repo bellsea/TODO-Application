@@ -78,8 +78,19 @@
     transition: background 0.3s ease;
 }
 
+/* ホバー時の色 */
 .todo-item:hover {
     background-color: #f1f1f1;
+}
+
+/* 選択時の色 (ホバーより優先) */
+.todo-item.selected {
+    background-color: khaki;
+}
+
+/* ホバーされたら選択状態でもホバー色を適用 */
+.todo-item.selected:hover {
+    background-color: rgb(245, 230, 99);
 }
 
 /* 左側の内容（チェックボックス + タイトル + 日付 + 時間） */

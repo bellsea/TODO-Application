@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./ScheduleList.css";
 import { useNavigate } from "react-router-dom";
+import { dataStateSelector } from "../../../../store/reducers/dataSlice";
+import { useSelector } from "react-redux";
 
-const HOUR_HEIGHT = 50; // 1時間あたりの高さ
-const OFFSET_TOP = 25; // アイテムのオフセット
-const OFFSET_BOTTOM = 15; // 高さの誤差
-const ITEM_WIDTH = 112; // 横幅
+const HOUR_HEIGHT = 25; // 1時間あたりの高さ
+const OFFSET_HEIGHT = 12.5; // アイテムの高さの誤差
+const ITEM_WIDTH = 105; // アイテムの横幅
 
 const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
 
@@ -29,11 +30,7 @@ const findAvailableLeftPosition = (top, bottom, occupiedPositions) => {
     foundOverlap = false;
     for (const timeRange of Object.keys(occupiedPositions)) {
       const [occupiedTop, occupiedBottom] = timeRange.split("-").map(Number);
-      if (
-        top < occupiedBottom &&
-        bottom > occupiedTop &&
-        occupiedPositions[timeRange].includes(left)
-      ) {
+      if (top < occupiedBottom && bottom > occupiedTop && occupiedPositions[timeRange].includes(left)) {
         foundOverlap = true;
         left += ITEM_WIDTH;
         break;
@@ -46,30 +43,64 @@ const findAvailableLeftPosition = (top, bottom, occupiedPositions) => {
 
 const ScheduleList = ({ selectedDate }) => {
   const navigate = useNavigate();
+  const [selectedId, setSelectedId] = useState(null); // クリックされたIDを管理
 
-  // ✅ スケジュールデータに `id` を追加
-  const schedules = useMemo(() => [
-    { id: 1, date: "2025-03-09", timeFrom: "11:30", timeTo: "15:30", title: "会議" },
-    { id: 2, date: "2025-03-09", timeFrom: "12:00", timeTo: "21:30", title: "ランチ" },
-    { id: 3, date: "2025-03-09", timeFrom: "18:00", timeTo: "21:00", title: "ジム" },
-    { id: 4, date: "2025-03-09", timeFrom: "19:00", timeTo: "20:00", title: "読書" }
-  ], []);
+  const schedules = useSelector(dataStateSelector).schedules;
 
   const formattedDate = getFormattedDate(selectedDate);
-  const filteredSchedules = useMemo(
-    () => schedules.filter((schedule) => schedule.date === formattedDate),
+  const filteredSchedules = useMemo(() => 
+    schedules
+      .filter((schedule) => schedule.date === formattedDate)
+      .sort((a, b) => {
+        if (a.timeFrom !== b.timeFrom) {
+          return a.timeFrom.localeCompare(b.timeFrom); // timeFrom でソート
+        }
+        return a.timeTo.localeCompare(b.timeTo); // timeFrom が同じ場合 timeTo でソート
+      }), 
     [formattedDate, schedules]
   );
 
   let occupiedPositions = {}; // { timeRange: [left values] }
 
+  // 画面全体のクリックで選択解除
+  const handleClickOutside = (event) => {
+    if (!event.target.closest(".schedule-item") && !event.target.closest(".todo-item")) {
+      setSelectedId(null);
+    }
+  };
+
+  // 画面全体をクリックした時に動く関数
+  React.useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
-    <div className="schedule-container">
+    <div className="schedule-container" >
       <div className="todo-header">
         <h2 className="schedule-title">{selectedDate.toLocaleDateString("ja-JP")} の予定</h2>
         <div className="todo-hedder-buttons">
           <button className="todo-red-button" onClick={() => navigate("/schedule/add")}>スケジュール追加</button>
         </div>
+      </div>
+      <div className="todo-container">
+        <ul className="todo-list">
+          {filteredSchedules.map((schedule) => (
+            <li 
+              key={schedule.id} 
+              className={`todo-item ${selectedId === schedule.id ? "selected" : ""}`}
+              onClick={() => setSelectedId(schedule.id)}
+            >
+              <div className="todo-content">
+                <span className="todo-text">{schedule.title}</span>
+                <span className="todo-date">{schedule.timeFrom} 〜 {schedule.timeTo}</span>
+              </div>
+              <button className="todo-black-button" onClick={() => navigate(`/schedule/edit/${schedule.id}`)}>
+                編集
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="schedule-wrapper">
         <div className="schedule-grid">
@@ -84,8 +115,8 @@ const ScheduleList = ({ selectedDate }) => {
           {/* スケジュールエリア */}
           <div className="schedule-list">
             {filteredSchedules.map((schedule) => {
-              const top = getTimePosition(schedule.timeFrom) + OFFSET_TOP;
-              const bottom = getTimePosition(schedule.timeTo) + OFFSET_BOTTOM;
+              const top = getTimePosition(schedule.timeFrom) + OFFSET_HEIGHT;
+              const bottom = getTimePosition(schedule.timeTo) + OFFSET_HEIGHT;
               const height = bottom - top;
               const left = findAvailableLeftPosition(top, bottom, occupiedPositions);
 
@@ -97,12 +128,13 @@ const ScheduleList = ({ selectedDate }) => {
               return (
                 <div
                   key={schedule.id}
-                  className="schedule-item"
                   style={{ top: `${top}px`, height: `${height}px`, left: `${left}px` }}
-                  onClick={() => navigate(`/schedule/edit/${schedule.id}`)} // ✅ クリックイベント追加
-                >
-                  {schedule.title} <br />
-                  {schedule.timeFrom} - {schedule.timeTo}
+                  className={`schedule-item ${selectedId === schedule.id ? "selected" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation(); // 他の要素のクリックイベントを防ぐ
+                    setSelectedId(schedule.id);
+                  }}
+                > {schedule.title} <br /> {schedule.timeFrom} - {schedule.timeTo}
                 </div>
               );
             })}

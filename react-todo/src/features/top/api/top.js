@@ -4,14 +4,14 @@ import axiosClient from "../../../lib/axiosClient";
  * Todo一覧取得
  */
 export const getAllTodo = () => {
-    return axiosClient.get("/todo/all");
+    return axiosClient.get("/todo/get/all");
 };
 
 /**
  * Scedule一覧取得
  */
 export const getAllScheduled = () => {
-    return axiosClient.get("/schedules/all");
+    return axiosClient.get("/schedules/get/all");
 };
 
 /**

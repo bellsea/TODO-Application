@@ -31,8 +31,8 @@
   }
   
   .time-label {
-    height: 50px;
-    line-height: 50px;
+    height: 25px;
+    line-height: 25px;
     font-size: 0.9rem;
     color: gray;
     position: relative;
@@ -60,7 +60,6 @@
     width: 100px;
     background-color: rgba(100, 149, 237, 0.7); /* 半透明の青色 */
     border-radius: 5px;
-    padding: 5px;
     font-size: 14px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer; /* ✅ クリックできることを明示 */
@@ -68,5 +67,14 @@
   }
 
   .schedule-item:hover {
-    background-color: #618f63; /* ✅ ホバー時のエフェクト */
+    background-color: rgba(55, 119, 236, 0.7); /* ✅ ホバー時のエフェクト */
   }
+
+  .schedule-item.selected {
+    background-color: khaki;
+  }
+
+/* ホバーされたら選択状態でもホバー色を適用 */
+.schedule-item.selected:hover {
+  background-color: rgb(245, 230, 99);
+}

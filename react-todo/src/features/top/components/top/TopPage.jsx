@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoCalendar from "../../../../components/calendar/TodoCalendar";
 import TodoList from "./TodoList";
 import Layout from "../../../../components/layout/Layout";
 import "./TopPage.css";
 import SucheduleList from "./SucheduleList";
+import { useDispatch } from "react-redux";
+import { getAllData } from "../../state/callReducers";
 
 function TopPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllData());
+    }, [dispatch]);
 
   return (
     <Layout title={"カレンダー"}>

@@ -6,7 +6,8 @@ import { dataSlice } from "../../../store/reducers/dataSlice";
 // Todo_Schedule全取得
 export const getAllData = createAsyncThunk(
   "getData",
-  async ( { dispatch, rejectWithValue } ) => {
+  async (data, { dispatch, rejectWithValue } ) => {
+    dispatch(authSlice.actions.onLoading());
     try {
       const todoData = await topAPI.getAllTodo();
       const schedules = await topAPI.getAllScheduled();
