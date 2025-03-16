@@ -15,7 +15,6 @@ const AuthInitializer = () => {
       dispatch(authSlice.actions.loggedIn({ account: response.data }));
     } catch (error) {
       dispatch(authSlice.actions.loggedOut());
-      navigate("/login");
     }
   }, [dispatch, navigate]);
   
