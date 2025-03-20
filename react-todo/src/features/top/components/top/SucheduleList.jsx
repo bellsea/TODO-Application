@@ -75,6 +75,9 @@ const ScheduleList = ({ selectedDate }) => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  // hour:minの形に変換
+  const formatTime = (time) => time.match(/^\d{1,2}:\d{2}/)[0];
+
   return (
     <div className="schedule-container" >
       <div className="todo-header">
@@ -93,7 +96,10 @@ const ScheduleList = ({ selectedDate }) => {
             >
               <div className="todo-content">
                 <span className="todo-text">{schedule.title}</span>
-                <span className="todo-date">{schedule.timeFrom} 〜 {schedule.timeTo}</span>
+                {schedule.allDay ?
+                  <span className="todo-date">一日中</span> :
+                  <span className="todo-date">{formatTime(schedule.timeFrom)} 〜 {formatTime(schedule.timeTo)}</span>
+                }
               </div>
               <button className="todo-black-button" onClick={() => navigate(`/schedule/edit/${schedule.id}`)}>
                 編集
@@ -134,7 +140,7 @@ const ScheduleList = ({ selectedDate }) => {
                     e.stopPropagation(); // 他の要素のクリックイベントを防ぐ
                     setSelectedId(schedule.id);
                   }}
-                > {schedule.title} <br /> {schedule.timeFrom} - {schedule.timeTo}
+                > {schedule.title} <br /> {schedule.allDay ? "一日中" : <span >{formatTime(schedule.timeFrom)} - {formatTime(schedule.timeTo)}</span>}
                 </div>
               );
             })}

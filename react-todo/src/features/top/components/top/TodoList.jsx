@@ -9,6 +9,7 @@ const TodoList = ({ selectedDate }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const todo = useSelector(dataStateSelector).todo;
+  const schedule = useSelector(dataStateSelector).schedules;
   const [checkedTodos, setCheckedTodos] = useState([]);
 
   // チェックボックスの変更処理
@@ -21,24 +22,28 @@ const TodoList = ({ selectedDate }) => {
   // タスク完了処理（チェックされた todo の complete を true にする）
   const handleCompleteTasks = () => {
     dispatch(completeTodo(checkedTodos));
+    console.log(todo, schedule);
     setCheckedTodos([]);
   };
 
   // 指定日を基準にタスクを分類
 // 指定日を基準にタスクを分類
 const pastTodos = todo
-  .filter((t) => t.date && new Date(t.date) <= selectedDate) // 期限あり & 指定日以前
-  .sort((a, b) => new Date(a.date) - new Date(b.date));
+  .filter((t) => t.deadline_date && new Date(t.deadline_date) <= selectedDate) // 期限あり & 指定日以前
+  .sort((a, b) => new Date(a.deadline_date) - new Date(b.deadline_date));
 
 const futureTodosWithDate = todo
-  .filter((t) => t.date && new Date(t.date) > selectedDate) // 期限あり & 指定日より後
-  .sort((a, b) => new Date(a.date) - new Date(b.date));
+  .filter((t) => t.deadline_date && new Date(t.deadline_date) > selectedDate) // 期限あり & 指定日より後
+  .sort((a, b) => new Date(a.deadline_date) - new Date(b.deadline_date));
 
 const futureTodosWithoutDate = todo
-  .filter((t) => !t.date) // 期限なし
+  .filter((t) => !t.deadline_date) // 期限なし
   .sort((a, b) => a.id - b.id); // id の昇順でソート
 
 const futureTodos = [...futureTodosWithDate, ...futureTodosWithoutDate];
+
+  // hour:minの形に変換
+  const formatTime = (time) => time.match(/^\d{1,2}:\d{2}/)[0];
 
   return (
     <div>
@@ -64,8 +69,8 @@ const futureTodos = [...futureTodosWithDate, ...futureTodosWithoutDate];
                     onChange={() => handleCheckboxChange(todo.id)}
                   />
                   <span className="todo-text">{todo.title}</span>
-                  {todo.date && <span className="todo-date">{todo.date}</span>}
-                  {todo.time && <span className="todo-time">{todo.time} まで</span>}
+                  {todo.deadline_date && <span className="todo-date">{todo.deadline_date}</span>}
+                  {todo.deadline_time && <span className="todo-time">{formatTime(todo.deadline_time)} まで</span>}
                 </div>
                 <button className="todo-black-button" onClick={() => navigate(`/todo/edit/${todo.id}`)}>
                   編集
@@ -90,8 +95,8 @@ const futureTodos = [...futureTodosWithDate, ...futureTodosWithoutDate];
                     onChange={() => handleCheckboxChange(todo.id)}
                   />
                   <span className="todo-text">{todo.title}</span>
-                  {todo.date && <span className="todo-date">{todo.date}</span>}
-                  {todo.time && <span className="todo-time">{todo.time} まで</span>}
+                  {todo.deadline_date && <span className="todo-date">{todo.deadline_date}</span>}
+                  {todo.deadline_time && <span className="todo-time">{formatTime(todo.deadline_time)} まで</span>}
                 </div>
                 <button className="todo-black-button" onClick={() => navigate(`/todo/edit/${todo.id}`)}>
                   編集

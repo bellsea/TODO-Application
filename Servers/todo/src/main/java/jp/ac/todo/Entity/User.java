@@ -1,26 +1,21 @@
 package jp.ac.todo.Entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import jp.ac.todo.Entity.Base.BaseNormalEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "users") // テーブル名を指定
-public class User {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "users")
+public class User extends BaseNormalEntity implements Serializable{
 
     @Column(name = "name", nullable = false)
     private String name;
