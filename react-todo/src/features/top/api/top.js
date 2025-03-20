@@ -11,7 +11,7 @@ export const getAllTodo = () => {
  * Scedule一覧取得
  */
 export const getAllScheduled = () => {
-    return axiosClient.get("/schedules/get/all");
+    return axiosClient.get("/schedule/get/all");
 };
 
 /**

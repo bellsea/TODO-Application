@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authSlice } from "../../../store/reducers/authSlice";
 import * as topAPI from "../api/top";
-import { dataSlice } from "../../../store/reducers/dataSlice";
+import { dataSlice, dataStateSelector } from "../../../store/reducers/dataSlice";
+import { useSelector } from "react-redux";
 
 // Todo_Schedule全取得
 export const getAllData = createAsyncThunk(
@@ -13,6 +14,7 @@ export const getAllData = createAsyncThunk(
       const schedules = await topAPI.getAllScheduled();
       dispatch(dataSlice.actions.setTodo({ todo: todoData.data }));
       dispatch(dataSlice.actions.setSchedules({ schedules: schedules.data }));
+      console.log(useSelector(dataStateSelector));
       return null;
     } catch (error) {
       dispatch(authSlice.actions.fail());
