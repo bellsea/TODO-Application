@@ -1,40 +1,63 @@
 .calendar-wrapper {
   display: flex;
-  align-items: center;
+  justify-content: center; /* カレンダーを中央揃え */
   width: 100%;
 }
 
 /* カレンダー全体のサイズ調整 */
 .react-calendar {
-    width: 30%;  /* カレンダーを大きく */
-    max-width: 300%;
-    font-size: 18px;  /* フォントサイズを大きく */
-    border: none;
-  }
-  
-  /* 曜日部分のサイズ調整 */
-  .react-calendar__month-view__weekdays {
-    font-size: 12px;
-  }
-  
-  /* 各日付のセル（ボタン）のサイズを大きく */
-  .react-calendar__tile {
-    display: flex;
-    align-items: flex-start;
-    font-size: 14px;  /* 日付の文字を大きく */
-    height: 100px;  /* セルの高さを調整 */
-  }
-  
-  /* 選択した日付の強調 */
-  .react-calendar__tile--active {
-    background-color: #006edc !important;
-    color: white !important;
-    font-weight: bold;
-  }
-  
-  /* 今日の日付のデザイン */
-  .react-calendar__tile--now {
-    background-color: #ffdd57 !important;
-    color: black !important;
-    font-weight: bold;
-  }
+  width: 100%;  /* カレンダーの幅を100%に設定 */
+  max-width: 430px; /* 最大横幅を固定 */
+  font-size: 18px;  /* フォントサイズを大きく */
+  border: none;
+  box-sizing: border-box; /* ボーダーを含めたサイズ調整 */
+}
+
+/* 曜日部分のサイズ調整 */
+.react-calendar__month-view__weekdays {
+  font-size: 12px;
+}
+
+/* 各日付のセル（ボタン）のサイズを大きく */
+.react-calendar__tile {
+  display: flex;
+  flex-direction: column;  /* 縦方向に並べる */
+  justify-content: flex-start;  /* セル内でコンテンツを上に揃える */
+  align-items: center;  /* セル内の内容を中央揃え */
+  font-size: 14px;  /* 日付の文字を大きく */
+  height: 100px;  /* セルの高さを調整 */
+  position: relative;
+}
+
+/* 選択した日付の強調 */
+.react-calendar__tile--active {
+  background-color: #006edc !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* 今日の日付のデザイン */
+.react-calendar__tile--now {
+  background-color: #ffdd57 !important;
+  color: black !important;
+  font-weight: bold;
+}
+
+.tile-events {
+  display: flex;
+  flex-direction: column;  /* 縦方向に並べる */
+  gap: 2px;  /* イベント間のスペース */
+  width: 100%;
+}
+
+.event {
+  border-radius: 8px;
+  width: 100%;  /* イベントをセルの幅に合わせる */
+  color: rgb(0, 0, 0);
+  font-size: 0.5rem;
+  text-align: center; /* ラベルを中央揃え */
+}
+
+.event-title {
+  font-weight: bold;
+}
