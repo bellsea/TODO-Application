@@ -61,20 +61,11 @@
     background-color: rgba(100, 149, 237, 0.7); /* 半透明の青色 */
     border-radius: 5px;
     font-size: 14px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer; /* ✅ クリックできることを明示 */
-    transition: 0.2s ease-in-out;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: "#333333",
   }
 
   .schedule-item:hover {
-    background-color: rgba(55, 119, 236, 0.7); /* ✅ ホバー時のエフェクト */
-  }
-
-  .schedule-item.selected {
-    background-color: khaki;
-  }
-
-/* ホバーされたら選択状態でもホバー色を適用 */
-.schedule-item.selected:hover {
-  background-color: rgb(245, 230, 99);
+    filter: brightness(1.2); /* 明るさを 1.2 倍にする */
 }

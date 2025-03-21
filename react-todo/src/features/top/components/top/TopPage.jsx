@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TodoCalendar from "../../../../components/calendar/TodoCalendar";
-import TodoList from "./TodoList";
+import TodoList from "../todoList/TodoList";
 import Layout from "../../../../components/layout/Layout";
 import "./TopPage.css";
-import SucheduleList from "./SucheduleList";
+import SucheduleList from "../scheduleList/SucheduleList";
 import { useDispatch } from "react-redux";
 import { getAllData } from "../../state/callReducers";
 

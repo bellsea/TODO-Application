@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { dataStateSelector } from "../../../../store/reducers/dataSlice.js";
 import "./TodoList.css";
 import { completeTodo } from "../../state/callReducers.js";
+import ColorText from "../../../../components/text/ColorText.jsx";
 
 const TodoList = ({ selectedDate }) => {
   const dispatch = useDispatch();
@@ -68,9 +69,9 @@ const futureTodos = [...futureTodosWithDate, ...futureTodosWithoutDate];
                     checked={checkedTodos.includes(todo.id)}
                     onChange={() => handleCheckboxChange(todo.id)}
                   />
-                  <span className="todo-text">{todo.title}</span>
-                  {todo.deadline_date && <span className="todo-date">{todo.deadline_date}</span>}
-                  {todo.deadline_time && <span className="todo-time">{formatTime(todo.deadline_time)} まで</span>}
+                  <ColorText color={todo.color}>{todo.title}</ColorText>
+                  {todo.deadline_date && <ColorText color={todo.color} className="todo-date">{todo.deadline_date}</ColorText>}
+                  {todo.deadline_time && <ColorText color={todo.color} className="todo-time">{formatTime(todo.deadline_time)} まで</ColorText>}
                 </div>
                 <button className="todo-black-button" onClick={() => navigate(`/todo/edit/${todo.id}`)}>
                   編集
@@ -94,9 +95,9 @@ const futureTodos = [...futureTodosWithDate, ...futureTodosWithoutDate];
                     checked={checkedTodos.includes(todo.id)}
                     onChange={() => handleCheckboxChange(todo.id)}
                   />
-                  <span className="todo-text">{todo.title}</span>
-                  {todo.deadline_date && <span className="todo-date">{todo.deadline_date}</span>}
-                  {todo.deadline_time && <span className="todo-time">{formatTime(todo.deadline_time)} まで</span>}
+                  <ColorText color={todo.color} className="todo-text">{todo.title}</ColorText>
+                  {todo.deadline_date && <ColorText color={todo.color} className="todo-date">{todo.deadline_date}</ColorText>}
+                  {todo.deadline_time && <ColorText color={todo.color} className="todo-time">{formatTime(todo.deadline_time)} まで</ColorText>}
                 </div>
                 <button className="todo-black-button" onClick={() => navigate(`/todo/edit/${todo.id}`)}>
                   編集

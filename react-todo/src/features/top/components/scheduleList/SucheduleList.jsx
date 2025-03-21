@@ -3,6 +3,9 @@ import "./ScheduleList.css";
 import { useNavigate } from "react-router-dom";
 import { dataStateSelector } from "../../../../store/reducers/dataSlice";
 import { useSelector } from "react-redux";
+import ColorText from "../../../../components/text/ColorText";
+import SelectedColorItem from "./SelectedColorItem";
+import SelectedScheduleItem from "./SelectedScheduleItem";
 
 const HOUR_HEIGHT = 25; // 1時間あたりの高さ
 const OFFSET_HEIGHT = 12.5; // アイテムの高さの誤差
@@ -89,22 +92,18 @@ const ScheduleList = ({ selectedDate }) => {
       <div className="todo-container">
         <ul className="todo-list">
           {filteredSchedules.map((schedule) => (
-            <li 
-              key={schedule.id} 
-              className={`todo-item ${selectedId === schedule.id ? "selected" : ""}`}
-              onClick={() => setSelectedId(schedule.id)}
-            >
+            <SelectedColorItem color={schedule.color} schedule={schedule} isSelected={selectedId === schedule.id} onClick={() => setSelectedId(schedule.id)}>
               <div className="todo-content">
-                <span className="todo-text">{schedule.title}</span>
+                <ColorText className="todo-text" color={schedule.color} isSelected={selectedId === schedule.id}>{schedule.title}</ColorText>
                 {schedule.allDay ?
-                  <span className="todo-date">一日中</span> :
-                  <span className="todo-date">{formatTime(schedule.timeFrom)} 〜 {formatTime(schedule.timeTo)}</span>
+                  <ColorText className="todo-date" color={schedule.color} isSelected={selectedId === schedule.id}>一日中</ColorText> :
+                  <ColorText className="todo-date" color={schedule.color} isSelected={selectedId === schedule.id}>{formatTime(schedule.timeFrom)} 〜 {formatTime(schedule.timeTo)}</ColorText>
                 }
               </div>
               <button className="todo-black-button" onClick={() => navigate(`/schedule/edit/${schedule.id}`)}>
                 編集
               </button>
-            </li>
+            </SelectedColorItem>
           ))}
         </ul>
       </div>
@@ -132,15 +131,17 @@ const ScheduleList = ({ selectedDate }) => {
               occupiedPositions[timeRange].push(left);
 
               return (
-                <div
-                  key={schedule.id}
-                  style={{ top: `${top}px`, height: `${height}px`, left: `${left}px` }}
-                  className={`schedule-item ${selectedId === schedule.id ? "selected" : ""}`}
-                  onClick={(e) => {
-                    e.stopPropagation(); // 他の要素のクリックイベントを防ぐ
-                    setSelectedId(schedule.id);
-                  }}
-                > {schedule.title} <br /> {schedule.allDay ? "一日中" : <span >{formatTime(schedule.timeFrom)} - {formatTime(schedule.timeTo)}</span>}
+                <div className="schedule-container">
+                  <SelectedScheduleItem
+                        key={schedule.id}
+                        schedule={schedule}
+                        isSelected={selectedId === schedule.id}
+                        onClick={() => setSelectedId(schedule.id)}
+                        top={top}
+                        left={left}
+                        height={height}
+                        formatTime={formatTime}
+                  />
                 </div>
               );
             })}
