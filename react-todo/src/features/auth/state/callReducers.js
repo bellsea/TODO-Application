@@ -3,6 +3,7 @@ import * as loginAPI from "../api/login";
 import { authSlice } from "../../../store/reducers/authSlice";
 import * as resetPassAPI from "../api/resetPass";
 import * as registerAPI from "../api/register";
+import * as logoutAPI from "../api/logout";
 
 // ログイン時
 export const login = createAsyncThunk(
@@ -71,6 +72,21 @@ export const resetPass = createAsyncThunk(
       dispatch(authSlice.actions.onLoading());
       const response = await resetPassAPI.resetPass(data.email, data.password);
       dispatch(authSlice.actions.offLoading());
+      return response.data;
+    } catch (error) {
+      dispatch(authSlice.actions.fail());
+      return rejectWithValue();
+    }
+  }
+);
+
+// ログアウト
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await logoutAPI.logout();
+      dispatch(authSlice.actions.loggedOut());
       return response.data;
     } catch (error) {
       dispatch(authSlice.actions.fail());

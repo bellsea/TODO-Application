@@ -52,7 +52,7 @@
   }
   
   /* サイドバー内のメニュー */
-  .menu a {
+  .menu a, .logout-button{
     width: 85%;
     display: block;
     padding: 15px;
@@ -61,9 +61,18 @@
     border-bottom: 1px solid #ddd;
   }
   
-  .menu a:hover {
+  .menu a:hover, .logout-button:hover{
     background-color: #f0f0f0;
   }
+
+  /* ログアウトボタン */
+.logout-button {
+  margin-top: auto;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: red;
+}
   
   /* オーバーレイ */
   .overlay {
